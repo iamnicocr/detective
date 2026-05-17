@@ -19,15 +19,16 @@ private:
     HashSospecha tablaSospecha;
     ColaTestigos colaTestigo;
     ABBScores scoreTree;
-
     bool activeGame;
-
+    void playLoop();
+    void printControls();
     void printTitle();
     void printMenu();
     void registerDetec();
     void startGame();
     void printScores();
     void printStructs();
+
 
 public:
     Game();

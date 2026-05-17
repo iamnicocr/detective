@@ -71,9 +71,9 @@ void Game::startGame() {
     city.LocRandDetec(detective);
     printStructs();
     cout << endl;
-    cout << "Vista preliminar del tablero:" << endl;
+    cout << "Vista inicial del tablero:" << endl;
     city.printCity(detective);
-    cout << endl;
+    playLoop();
 }
 
 void Game::printScores() {
@@ -89,4 +89,49 @@ void Game::printStructs() {
     cout << "- HashSospecha: sospechosos buscados por nombre" << endl;
     cout << "- ColaTestigos: declaraciones en orden de llegada" << endl;
     cout << "- ABBScores: historico ordenado de menor a mayor" << endl;
+}
+
+void Game::printControls() {
+    cout << endl;
+    cout << "Controles disponibles:" << endl;
+    cout << "W/A/S/D -> mover detective" << endl;
+    cout << "T -> ver pistas recogidas" << endl;
+    cout << "X -> usar pista" << endl;
+    cout << "S -> ver sospechosos" << endl;
+    cout << "I -> interrogar testigo " << endl;
+    cout << "Q -> salir de la partida" << endl;
+}
+
+void Game::playLoop() {
+    char opc;
+    bool playing = true;
+    while (playing) {
+        printControls();
+        cout << endl;
+        cout << "Ingrese una accion: ";
+        cin >> opc;
+
+        if (opc == 'Q') {
+            cout << "Saliendo de la partida actual..." << endl;
+            playing = false;
+        } else if (opc == 'W' || opc == 'A' || opc == 'S' || opc == 'D') {
+            cout << "Movimiento pendiente para el siguiente avance." << endl;
+            city.printCity(detective);
+        } else if (opc == 'T') {
+            cout << "Consulta de pistas pendiente." << endl;
+            city.printCity(detective);
+        } else if (opc == 'X') {
+            cout << "Uso de pistas pendiente." << endl;
+            city.printCity(detective);
+        } else if (opc == 'S') {
+            cout << "Consulta de sospechosos pendiente." << endl;
+            city.printCity(detective);
+        } else if (opc == 'I') {
+            cout << "Interrogatorio pendiente." << endl;
+            city.printCity(detective);
+        } else {
+            cout << "Accion invalida." << endl;
+            city.printCity(detective);
+        }
+    }
 }
