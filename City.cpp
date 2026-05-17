@@ -128,17 +128,18 @@ Location* City::getRandFreeLoc() {
     for (int i = 0; i < 100; i++) {
         int fila = rand() % filas;
         int columna = rand() % columnas;
+
         Location* loc = getLocation(fila, columna);
-        if (loc != nullptr && loc->isFree()) {
+
+        if (loc != nullptr && loc->isFree() && !loc->getVisita()) {
             return loc;
         }
     }
-
     Location* row = start;
     while (row != nullptr) {
         Location* act = row;
         while (act != nullptr) {
-            if (act->isFree()) {
+            if (act->isFree() && !act->getVisita()) {
                 return act;
             }
             act = act->getRight();
@@ -157,26 +158,21 @@ void City::LocRandDetec(User& user) {
     }
 }
 
-void City::genTestAlleys() {
-    Location* loc1 = getLocation(1, 1);
-    Location* loc2 = getLocation(2, 6);
-    Location* loc3 = getLocation(5, 3);
-    Location* loc4 = getLocation(7, 7);
+void City::genAlleys() {
+    int created = 0;
+    int tries = 0;
 
-    if (loc1 != nullptr) {
-        loc1->setContent('|');
-        loc1->setVisible(false);
+    while (created < 16 && tries < 300) {
+        Location* loc = getRandFreeLoc();
+
+        if (loc != nullptr && loc->isFree() && !loc->getVisita()) {
+            loc->setContent('|');
+            loc->setVisible(false);
+            created++;
+        }
+        tries++;
     }
-    if (loc2 != nullptr) {
-        loc2->setContent('|');
-        loc2->setVisible(false);
-    }
-    if (loc3 != nullptr) {
-        loc3->setContent('|');
-        loc3->setVisible(false);
-    }
-    if (loc4 != nullptr) {
-        loc4->setContent('|');
-        loc4->setVisible(false);
+    if (created < 16) {
+        cout << "No se pudieron generar todos los callejones." << endl;
     }
 }
