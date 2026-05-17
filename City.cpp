@@ -77,20 +77,27 @@ int City::getColumnas() {
 void City::printCity(User& user) {
     cout << endl;
     cout << user.getName() << ", tu puntaje actual es: " << user.getScore() << endl;
-
     for (int i = 0; i < columnas + 2; i++) {
         cout << "# ";
     }
     cout << endl;
-
-    for (int i = 0; i < filas; i++) {
+    Location* row = start;
+    while (row != nullptr) {
         cout << "# ";
-        for (int j = 0; j < columnas; j++) {
-            cout << "o ";
+        Location* act = row;
+        while (act != nullptr) {
+            if (user.getActPos() == act) {
+                cout << "D ";
+            } else if (!act->getVisible()) {
+                cout << "o ";
+            } else {
+                cout << act->getContent() << " ";
+            }
+            act = act->getRight();
         }
         cout << "#" << endl;
+        row = row->getDown();
     }
-
     for (int i = 0; i < columnas + 2; i++) {
         cout << "# ";
     }
