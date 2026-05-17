@@ -11,16 +11,54 @@ City::~City() {
 }
 
 void City::genBaseCity() {
-    /*
-     * Método creado para que la ciudad exista como entidad principal
-     * construir lista múltiplemente enlazada de 9x9 nodos
-     */
+    freeMemory();
+    Location* prevRow = nullptr;
+
+    for (int fila = 0; fila < filas; fila++) {
+        Location* rowStart = nullptr;
+        Location* prevLoc = nullptr;
+        Location* upLoc = prevRow;
+
+        for (int columna = 0; columna < columnas; columna++) {
+            Location* newLoc = new Location(fila, columna);
+
+            if (fila == 0 && columna == 0) {
+                start = newLoc;
+            }
+
+            if (columna == 0) {
+                rowStart = newLoc;
+            }
+
+            if (prevLoc != nullptr) {
+                prevLoc->setRight(newLoc);
+                newLoc->setLeft(prevLoc);
+            }
+
+            if (upLoc != nullptr) {
+                upLoc->setDown(newLoc);
+                newLoc->setUp(upLoc);
+                upLoc = upLoc->getRight();
+            }
+            prevLoc = newLoc;
+        }
+        prevRow = rowStart;
+    }
 }
 
 void City::freeMemory() {
-    /*
-     * Recorrido para liberar los nodos creados
-     */
+    Location* row = start;
+
+    while (row != nullptr) {
+        Location* nextRow = row->getDown();
+        Location* act = row;
+        while (act != nullptr) {
+            Location* next = act->getRight();
+            delete act;
+            act = next;
+        }
+        row = nextRow;
+    }
     start = nullptr;
 }
 
@@ -40,9 +78,6 @@ void City::printCity(User& user) {
     cout << endl;
     cout << user.getName() << ", tu puntaje actual es: " << user.getScore() << endl;
 
-    /*
-     * Imprimir recorriendo la lista múltiplemente enlazada
-     */
     for (int i = 0; i < columnas + 2; i++) {
         cout << "# ";
     }
@@ -63,7 +98,17 @@ void City::printCity(User& user) {
 }
 
 Location* City::getLocation(int fila, int columna) {
-    return nullptr;
+    if (fila < 0 || fila >= filas || columna < 0 || columna >= columnas) {
+        return nullptr;
+    }
+    Location* act = start;
+    for (int i = 0; i < fila; i++) {
+        act = act->getDown();
+    }
+    for (int j = 0; j < columna; j++) {
+        act = act->getRight();
+    }
+    return act;
 }
 
 Location* City::getRandFreeLoc() {
