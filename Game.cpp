@@ -67,14 +67,12 @@ void Game::registerDetec() {
 void Game::startGame() {
     cout << endl;
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
-
     city.genBaseCity();
+    city.LocRandDetec(detective);
     printStructs();
-
     cout << endl;
     cout << "Vista preliminar del tablero:" << endl;
     city.printCity(detective);
-
     cout << endl;
 }
 

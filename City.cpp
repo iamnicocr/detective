@@ -123,5 +123,10 @@ Location* City::getRandFreeLoc() {
 }
 
 void City::LocRandDetec(User& user) {
-    user.setActPos(nullptr);
+    Location* act = getLocation(4, 4);
+    if (act != nullptr) {
+        user.setActPos(act);
+        act->setVisible(true);
+        act->setVisita(true);
+    }
 }
