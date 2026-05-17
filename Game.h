@@ -28,7 +28,7 @@ private:
     void startGame();
     void printScores();
     void printStructs();
-
+    void moveDetec(char opc);
 
 public:
     Game();

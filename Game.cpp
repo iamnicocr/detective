@@ -91,6 +91,28 @@ void Game::printStructs() {
     cout << "- ABBScores: historico ordenado de menor a mayor" << endl;
 }
 
+void Game::moveDetec(char opc) {
+    Location* act = detective.getActPos();
+    Location* next = nullptr;
+    detective.increScore();
+    if (act == nullptr) {
+        cout << "El detective aun no tiene ubicacion." << endl;
+        return;
+    }
+    if (opc == 'A') {
+        next = act->getLeft();
+    } else if (opc == 'D') {
+        next = act->getRight();
+    }
+    if (next == nullptr) {
+        cout << "No puedes salir de la ciudad." << endl;
+        return;
+    }
+    detective.setActPos(next);
+    next->setVisible(true);
+    next->setVisita(true);
+}
+
 void Game::printControls() {
     cout << endl;
     cout << "Controles disponibles:" << endl;
@@ -110,12 +132,14 @@ void Game::playLoop() {
         cout << endl;
         cout << "Ingrese una accion: ";
         cin >> opc;
-
         if (opc == 'Q') {
             cout << "Saliendo de la partida actual..." << endl;
             playing = false;
-        } else if (opc == 'W' || opc == 'A' || opc == 'S' || opc == 'D') {
-            cout << "Movimiento pendiente para el siguiente avance." << endl;
+        } else if (opc == 'A' || opc == 'D') {
+            moveDetec(opc);
+            city.printCity(detective);
+        } else if (opc == 'W' || opc == 'S') {
+            cout << "Movimiento vertical pendiente." << endl;
             city.printCity(detective);
         } else if (opc == 'T') {
             cout << "Consulta de pistas pendiente." << endl;
