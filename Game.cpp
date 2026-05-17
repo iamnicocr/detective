@@ -96,6 +96,7 @@ void Game::moveDetec(char opc) {
     Location* act = detective.getActPos();
     Location* next = nullptr;
     detective.increScore();
+
     if (act == nullptr) {
         cout << "El detective aun no tiene ubicacion." << endl;
         return;
@@ -111,6 +112,11 @@ void Game::moveDetec(char opc) {
     }
     if (next == nullptr) {
         cout << "No puedes salir de la ciudad." << endl;
+        return;
+    }
+    if (next->getContent() == '|') {
+        next->setVisible(true);
+        cout << "No puedes pasar. Hay un callejon cerrado." << endl;
         return;
     }
     detective.setActPos(next);

@@ -136,20 +136,21 @@ void City::genTestAlleys() {
     Location* loc2 = getLocation(2, 6);
     Location* loc3 = getLocation(5, 3);
     Location* loc4 = getLocation(7, 7);
+
     if (loc1 != nullptr) {
         loc1->setContent('|');
-        loc1->setVisible(true);
+        loc1->setVisible(false);
     }
     if (loc2 != nullptr) {
         loc2->setContent('|');
-        loc2->setVisible(true);
+        loc2->setVisible(false);
     }
     if (loc3 != nullptr) {
         loc3->setContent('|');
-        loc3->setVisible(true);
+        loc3->setVisible(false);
     }
     if (loc4 != nullptr) {
         loc4->setContent('|');
-        loc4->setVisible(true);
+        loc4->setVisible(false);
     }
 }
