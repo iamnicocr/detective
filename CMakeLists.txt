@@ -18,3 +18,14 @@ add_executable(ProyectoDetective
         ABBScores.cpp
         Game.cpp
 )
+
+# Enable testing
+enable_testing()
+
+# Add your test executable(s)
+add_executable(tests
+        tests/test_main.cpp
+        # Add other test source files here
+)
+
+add_test(NAME MyTests COMMAND tests)
