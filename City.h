@@ -25,6 +25,7 @@ public:
     Location* getRandFreeLoc();
     void LocRandDetec(User& user);
     void genAlleys();
+    void genTestHints();
 };
 
 #endif

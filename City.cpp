@@ -121,6 +121,30 @@ Location* City::getLocation(int fila, int columna) {
     return act;
 }
 
+void City::genTestHints() {
+    Location* loc1 = getLocation(1, 3);
+    Location* loc2 = getLocation(3, 6);
+    Location* loc3 = getLocation(6, 2);
+    Location* loc4 = getLocation(7, 5);
+
+    if (loc1 != nullptr && loc1->isFree() && !loc1->getVisita()) {
+        loc1->setContent('H');
+        loc1->setVisible(false);
+    }
+    if (loc2 != nullptr && loc2->isFree() && !loc2->getVisita()) {
+        loc2->setContent('C');
+        loc2->setVisible(false);
+    }
+    if (loc3 != nullptr && loc3->isFree() && !loc3->getVisita()) {
+        loc3->setContent('T');
+        loc3->setVisible(false);
+    }
+    if (loc4 != nullptr && loc4->isFree() && !loc4->getVisita()) {
+        loc4->setContent('P');
+        loc4->setVisible(false);
+    }
+}
+
 Location* City::getRandFreeLoc() {
     if (start == nullptr) {
         return nullptr;
