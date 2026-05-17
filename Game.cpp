@@ -99,8 +99,12 @@ void Game::moveDetec(char opc) {
         cout << "El detective aun no tiene ubicacion." << endl;
         return;
     }
-    if (opc == 'A') {
+    if (opc == 'W') {
+        next = act->getUp();
+    } else if (opc == 'A') {
         next = act->getLeft();
+    } else if (opc == 'S') {
+        next = act->getDown();
     } else if (opc == 'D') {
         next = act->getRight();
     }
@@ -112,7 +116,6 @@ void Game::moveDetec(char opc) {
     next->setVisible(true);
     next->setVisita(true);
 }
-
 void Game::printControls() {
     cout << endl;
     cout << "Controles disponibles:" << endl;
@@ -135,13 +138,10 @@ void Game::playLoop() {
         if (opc == 'Q') {
             cout << "Saliendo de la partida actual..." << endl;
             playing = false;
-        } else if (opc == 'A' || opc == 'D') {
+        } else if (opc == 'W' || opc == 'A' || opc == 'S' || opc == 'D') {
             moveDetec(opc);
             city.printCity(detective);
-        } else if (opc == 'W' || opc == 'S') {
-            cout << "Movimiento vertical pendiente." << endl;
-            city.printCity(detective);
-        } else if (opc == 'T') {
+        }else if (opc == 'T') {
             cout << "Consulta de pistas pendiente." << endl;
             city.printCity(detective);
         } else if (opc == 'X') {
