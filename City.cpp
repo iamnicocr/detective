@@ -130,3 +130,26 @@ void City::LocRandDetec(User& user) {
         act->setVisita(true);
     }
 }
+
+void City::genTestAlleys() {
+    Location* loc1 = getLocation(1, 1);
+    Location* loc2 = getLocation(2, 6);
+    Location* loc3 = getLocation(5, 3);
+    Location* loc4 = getLocation(7, 7);
+    if (loc1 != nullptr) {
+        loc1->setContent('|');
+        loc1->setVisible(true);
+    }
+    if (loc2 != nullptr) {
+        loc2->setContent('|');
+        loc2->setVisible(true);
+    }
+    if (loc3 != nullptr) {
+        loc3->setContent('|');
+        loc3->setVisible(true);
+    }
+    if (loc4 != nullptr) {
+        loc4->setContent('|');
+        loc4->setVisible(true);
+    }
+}

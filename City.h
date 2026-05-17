@@ -24,6 +24,7 @@ public:
     Location* getLocation(int fila, int columna);
     Location* getRandFreeLoc();
     void LocRandDetec(User& user);
+    void genTestAlleys();
 };
 
 #endif

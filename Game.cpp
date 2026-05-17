@@ -69,6 +69,7 @@ void Game::startGame() {
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
     city.genBaseCity();
     city.LocRandDetec(detective);
+    city.genTestAlleys();
     printStructs();
     cout << endl;
     cout << "Vista inicial del tablero:" << endl;
