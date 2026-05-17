@@ -1,9 +1,12 @@
 #include "City.h"
+#include <cstdlib>
+#include <ctime>
 
 City::City() {
     start = nullptr;
     filas = 9;
     columnas = 9;
+    srand(time(nullptr));
 }
 
 City::~City() {
@@ -119,6 +122,29 @@ Location* City::getLocation(int fila, int columna) {
 }
 
 Location* City::getRandFreeLoc() {
+    if (start == nullptr) {
+        return nullptr;
+    }
+    for (int i = 0; i < 100; i++) {
+        int fila = rand() % filas;
+        int columna = rand() % columnas;
+        Location* loc = getLocation(fila, columna);
+        if (loc != nullptr && loc->isFree()) {
+            return loc;
+        }
+    }
+
+    Location* row = start;
+    while (row != nullptr) {
+        Location* act = row;
+        while (act != nullptr) {
+            if (act->isFree()) {
+                return act;
+            }
+            act = act->getRight();
+        }
+        row = row->getDown();
+    }
     return nullptr;
 }
 
