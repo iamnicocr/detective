@@ -2,6 +2,6 @@
 
 int main() {
     Game game;
-    game.ejecutar()
+    game.ejecutar();
     return 0;
 }
