@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <cstdlib>
 
 Game::Game() {
     activeGame = true;
@@ -163,9 +164,7 @@ void Game::useHint() {
     }
     Hint hint = hintStack.pop();
     char type = hint.getTipo();
-    cout << "Usaste la ultima pista recogida: "
-         << hint.getTypeName()
-         << " (" << type << ")" << endl;
+    cout << "Usaste la ultima pista recogida: "<< hint.getTypeName()<< " (" << type << ")" << endl;
     if (type == 'H') {
         int prevScore = detective.getScore();
         detective.halfScore();
@@ -174,8 +173,20 @@ void Game::useHint() {
         cout << "Puntaje actual: " << detective.getScore() << endl;
     } else if (type == 'C') {
         city.removeRandAlleys(2);
+    } else if (type == 'T') {
+        int prevScore = detective.getScore();
+        int result = rand() % 2;
+        if (result == 0) {
+            detective.restartScore();
+            cout << "El Testimonio fue favorable. Tu puntaje bajo a cero." << endl;
+        } else {
+            detective.doubScore();
+            cout << "El Testimonio fue confuso. Tu puntaje se duplico." << endl;
+        }
+        cout << "Puntaje anterior: " << prevScore << endl;
+        cout << "Puntaje actual: " << detective.getScore() << endl;
     } else {
-        cout << "...." << endl;
+        cout << "El efecto de esta pista se implementara en otro avance." << endl;
     }
 }
 
