@@ -49,14 +49,11 @@ Hint HintStack::pop() {
     if (isEmpty()) {
         return Hint();
     }
-
     HintNode* aux = topNode;
     Hint hint = aux->getDato();
-
     topNode = topNode->getNext();
     delete aux;
     cantidad--;
-
     return hint;
 }
 
@@ -64,7 +61,6 @@ Hint HintStack::top() {
     if (isEmpty()) {
         return Hint();
     }
-
     return topNode->getDato();
 }
 
@@ -73,13 +69,11 @@ void HintStack::show() {
         cout << "Aun no hay pistas recogidas." << endl;
         return;
     }
-
     HintNode* act = topNode;
     int posc = 0;
     cout << "Pistas recogidas:" << endl;
     while (act != nullptr) {
         cout << "[ " << act->getDato().getTipo() << " ]";
-
         if (posc == 0) {
             cout << " <- ultima pista disponible";
         }

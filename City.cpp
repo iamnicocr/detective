@@ -182,6 +182,50 @@ void City::LocRandDetec(User& user) {
     }
 }
 
+void City::removeRandAlleys(int amnt) {
+    int removed = 0;
+    while (removed < amnt) {
+        int totalAlleys = 0;
+        Location* row = start;
+        while (row != nullptr) {
+            Location* act = row;
+            while (act != nullptr) {
+                if (act->getContent() == '|') {
+                    totalAlleys++;
+                }
+                act = act->getRight();
+            }
+            row = row->getDown();
+        }
+        if (totalAlleys == 0) {
+            cout << "No quedan callejones para eliminar." << endl;
+            return;
+        }
+        int randAlley = rand() % totalAlleys;
+        int count = 0;
+        bool deleted = false;
+        row = start;
+        while (row != nullptr && !deleted) {
+            Location* act = row;
+            while (act != nullptr && !deleted) {
+                if (act->getContent() == '|') {
+                    if (count == randAlley) {
+                        bool wasVisible = act->getVisible();
+                        act->setContent(' ');
+                        act->setVisible(wasVisible);
+                        removed++;
+                        deleted = true;
+                    }
+                    count++;
+                }
+                act = act->getRight();
+            }
+            row = row->getDown();
+        }
+    }
+    cout << "La Coartada elimino " << removed << " callejones del tablero." << endl;
+}
+
 void City::genAlleys() {
     int created = 0;
     int tries = 0;

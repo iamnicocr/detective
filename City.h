@@ -26,6 +26,7 @@ public:
     void LocRandDetec(User& user);
     void genAlleys();
     void genTestHints();
+    void removeRandAlleys(int amnt);
 };
 
 #endif

@@ -172,8 +172,10 @@ void Game::useHint() {
         cout << "La Huella redujo tu puntaje a la mitad." << endl;
         cout << "Puntaje anterior: " << prevScore << endl;
         cout << "Puntaje actual: " << detective.getScore() << endl;
+    } else if (type == 'C') {
+        city.removeRandAlleys(2);
     } else {
-        cout << "Por implementar..." << endl;
+        cout << "...." << endl;
     }
 }
 
