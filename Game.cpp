@@ -156,6 +156,27 @@ void Game::collectHint(Location* loc) {
     loc->setVisita(true);
 }
 
+void Game::useHint() {
+    if (hintStack.isEmpty()) {
+        cout << "No tienes pistas para usar." << endl;
+        return;
+    }
+    Hint hint = hintStack.pop();
+    char type = hint.getTipo();
+    cout << "Usaste la ultima pista recogida: "
+         << hint.getTypeName()
+         << " (" << type << ")" << endl;
+    if (type == 'H') {
+        int prevScore = detective.getScore();
+        detective.halfScore();
+        cout << "La Huella redujo tu puntaje a la mitad." << endl;
+        cout << "Puntaje anterior: " << prevScore << endl;
+        cout << "Puntaje actual: " << detective.getScore() << endl;
+    } else {
+        cout << "Por implementar..." << endl;
+    }
+}
+
 void Game::playLoop() {
     char opc;
     bool playing = true;
@@ -170,11 +191,11 @@ void Game::playLoop() {
         } else if (opc == 'W' || opc == 'A' || opc == 'S' || opc == 'D') {
             moveDetec(opc);
             city.printCity(detective);
-        }else if (opc == 'T') {
-            cout << "Consulta de pistas pendiente." << endl;
+        } else if (opc == 'T') {
+            hintStack.show();
             city.printCity(detective);
         } else if (opc == 'X') {
-            cout << "Uso de pistas pendiente." << endl;
+            useHint();
             city.printCity(detective);
         } else if (opc == 'S') {
             cout << "Consulta de sospechosos pendiente." << endl;

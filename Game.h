@@ -31,6 +31,7 @@ private:
     void moveDetec(char opc);
     bool isHint(char content);
     void collectHint(Location* loc);
+    void useHint();
 
 public:
     Game();
