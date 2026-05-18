@@ -164,7 +164,7 @@ void Game::useHint() {
     }
     Hint hint = hintStack.pop();
     char type = hint.getTipo();
-    cout << "Usaste la ultima pista recogida: "<< hint.getTypeName()<< " (" << type << ")" << endl;
+    cout << "Usaste la ultima pista recogida: " << hint.getTypeName() << " (" << type << ")" << endl;
     if (type == 'H') {
         int prevScore = detective.getScore();
         detective.halfScore();
@@ -185,8 +185,16 @@ void Game::useHint() {
         }
         cout << "Puntaje anterior: " << prevScore << endl;
         cout << "Puntaje actual: " << detective.getScore() << endl;
-    } else {
-        cout << "El efecto de esta pista se implementara en otro avance." << endl;
+    } else if (type == 'P') {
+        Location* newPos = city.getRandFreeLoc();
+        if (newPos == nullptr) {
+            cout << "No hay una ubicacion libre para moverse." << endl;
+            return;
+        }
+        detective.setActPos(newPos);
+        newPos->setVisible(true);
+        newPos->setVisita(true);
+        cout << "La Prueba Forense movio al detective a otra ubicacion." << endl;
     }
 }
 
