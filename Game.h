@@ -29,6 +29,8 @@ private:
     void printScores();
     void printStructs();
     void moveDetec(char opc);
+    bool isHint(char content);
+    void collectHint(Location* loc);
 
 public:
     Game();

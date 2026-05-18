@@ -123,6 +123,7 @@ void Game::moveDetec(char opc) {
     detective.setActPos(next);
     next->setVisible(true);
     next->setVisita(true);
+    collectHint(next);
 }
 void Game::printControls() {
     cout << endl;
@@ -133,6 +134,26 @@ void Game::printControls() {
     cout << "S -> ver sospechosos" << endl;
     cout << "I -> interrogar testigo " << endl;
     cout << "Q -> salir de la partida" << endl;
+}
+
+bool Game::isHint(char content) {
+    return content == 'H' || content == 'C' || content == 'T' || content == 'P';
+}
+
+void Game::collectHint(Location* loc) {
+    if (loc == nullptr) {
+        return;
+    }
+    char type = loc->getContent();
+    if (!isHint(type)) {
+        return;
+    }
+    Hint hint(type);
+    hintStack.push(hint);
+    cout << "Has recogido una pista: " << hint.getTypeName() << " (" << type << ")" << endl;
+    loc->setContent(' ');
+    loc->setVisible(true);
+    loc->setVisita(true);
 }
 
 void Game::playLoop() {
