@@ -197,6 +197,7 @@ void Game::useHint() {
         cout << "La Prueba Forense movio al detective a otra ubicacion." << endl;
     }
     city.relocHint(type);
+    city.hideMap(detective.getActPos());
 }
 
 void Game::playLoop() {

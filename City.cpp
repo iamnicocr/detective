@@ -238,6 +238,28 @@ void City::relocHint(char type) {
     cout << "La pista " << type << " volvio al mapa." << endl;
 }
 
+void City::hideMap(Location* posAct) {
+    Location* row = start;
+    while (row != nullptr) {
+        Location* act = row;
+        while (act != nullptr) {
+            if (act == posAct) {
+                act->setVisible(true);
+                act->setVisita(true);
+            } else if (act->getContent() == '|') {
+                if (!act->getVisible()) {
+                    act->setVisible(false);
+                }
+            } else {
+                act->setVisible(false);
+                act->setVisita(false);
+            }
+            act = act->getRight();
+        }
+        row = row->getDown();
+    }
+}
+
 void City::genAlleys() {
     int created = 0;
     int tries = 0;

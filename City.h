@@ -28,6 +28,7 @@ public:
     void genTestHints();
     void removeRandAlleys(int amnt);
     void relocHint(char type);
+    void hideMap(Location* posAct);
 };
 
 #endif
