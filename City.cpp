@@ -1,6 +1,7 @@
 #include "City.h"
 #include <cstdlib>
 #include <ctime>
+#include <string>
 
 City::City() {
     start = nullptr;
@@ -16,28 +17,22 @@ City::~City() {
 void City::genBaseCity() {
     freeMemory();
     Location* prevRow = nullptr;
-
     for (int fila = 0; fila < filas; fila++) {
         Location* rowStart = nullptr;
         Location* prevLoc = nullptr;
         Location* upLoc = prevRow;
-
         for (int columna = 0; columna < columnas; columna++) {
             Location* newLoc = new Location(fila, columna);
-
             if (fila == 0 && columna == 0) {
                 start = newLoc;
             }
-
             if (columna == 0) {
                 rowStart = newLoc;
             }
-
             if (prevLoc != nullptr) {
                 prevLoc->setRight(newLoc);
                 newLoc->setLeft(prevLoc);
             }
-
             if (upLoc != nullptr) {
                 upLoc->setDown(newLoc);
                 newLoc->setUp(upLoc);
@@ -51,7 +46,6 @@ void City::genBaseCity() {
 
 void City::freeMemory() {
     Location* row = start;
-
     while (row != nullptr) {
         Location* nextRow = row->getDown();
         Location* act = row;
@@ -276,5 +270,24 @@ void City::genAlleys() {
     }
     if (created < 16) {
         cout << "No se pudieron generar todos los callejones." << endl;
+    }
+}
+
+void City::genHints() {
+    string types = "HCTP";
+    int created = 0;
+    int tries = 0;
+    while (created < 10 && tries < 300) {
+        Location* loc = getRandFreeLoc();
+        if (loc != nullptr && loc->isFree() && !loc->getVisita()) {
+            int posc = rand() % types.length();
+            loc->setContent(types[posc]);
+            loc->setVisible(false);
+            created++;
+        }
+        tries++;
+    }
+    if (created < 10) {
+        cout << "No se pudieron generar todas las pistas." << endl;
     }
 }

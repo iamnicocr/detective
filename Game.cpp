@@ -70,7 +70,7 @@ void Game::startGame() {
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
     city.genBaseCity();
     city.LocRandDetec(detective);
-    city.genTestHints();
+    city.genHints();
     city.genAlleys();
     printStructs();
     cout << endl;
