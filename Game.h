@@ -20,6 +20,8 @@ private:
     ColaTestigos colaTestigo;
     ABBScores scoreTree;
     bool activeGame;
+    string faultName;
+    void setRandomFault();
     void playLoop();
     void printControls();
     void printTitle();

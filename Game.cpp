@@ -4,6 +4,7 @@
 Game::Game() {
     activeGame = true;
     hintsFound = 0;
+    faultName = "";
 }
 
 void Game::ejecutar() {
@@ -70,7 +71,9 @@ void Game::startGame() {
     cout << endl;
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
     hintsFound = 0;
+    faultName = "";
     loadSospechosos();
+    setRandomFault();
     city.genBaseCity();
     city.LocRandDetec(detective);
     city.genHints();
@@ -129,13 +132,30 @@ void Game::moveDetec(char opc) {
     next->setVisita(true);
     collectHint(next);
 }
+
+void Game::setRandomFault() {
+    string names[8] = {
+        "Carlos", "Diana", "Eduardo", "Fernanda",
+        "Gonzalo", "Hilda", "Ivan", "Laura"
+    };
+    int posc = rand() % 8;
+    faultName = names[posc];
+    Sospechoso* sospechoso = tablaSospecha.search(faultName);
+    if (sospechoso != nullptr) {
+        sospechoso->setFault(true);
+        cout << "Culpable seleccionado internamente." << endl;
+    } else {
+        cout << "No se pudo seleccionar culpable." << endl;
+    }
+}
+
 void Game::printControls() {
     cout << endl;
     cout << "Controles disponibles:" << endl;
     cout << "W/A/S/D -> mover detective" << endl;
     cout << "T -> ver pistas recogidas" << endl;
     cout << "X -> usar pista" << endl;
-    cout << "S -> ver sospechosos" << endl;
+    cout << "V -> ver sospechosos" << endl;
     cout << "I -> interrogar testigo " << endl;
     cout << "Q -> salir de la partida" << endl;
 }
@@ -241,8 +261,8 @@ void Game::playLoop() {
         } else if (opc == 'X') {
             useHint();
             city.printCity(detective);
-        } else if (opc == 'S') {
-            cout << "Consulta de sospechosos pendiente." << endl;
+        } else if (opc == 'V') {
+            tablaSospecha.show();
             city.printCity(detective);
         } else if (opc == 'I') {
             cout << "Interrogatorio pendiente." << endl;
