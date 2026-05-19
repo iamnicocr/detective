@@ -3,6 +3,7 @@
 
 Game::Game() {
     activeGame = true;
+    hintsFound = 0;
 }
 
 void Game::ejecutar() {
@@ -68,6 +69,7 @@ void Game::registerDetec() {
 void Game::startGame() {
     cout << endl;
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
+    hintsFound = 0;
     city.genBaseCity();
     city.LocRandDetec(detective);
     city.genHints();
@@ -151,7 +153,12 @@ void Game::collectHint(Location* loc) {
     }
     Hint hint(type);
     hintStack.push(hint);
+    hintsFound++;
     cout << "Has recogido una pista: " << hint.getTypeName() << " (" << type << ")" << endl;
+    cout << "Progreso del caso: " << hintsFound << "/10 pistas recogidas." << endl;
+    if (hintsFound >= 10) {
+        cout << "Ya reuniste las 10 pistas. La fase de acusacion se activara en el siguiente avance." << endl;
+    }
     loc->setContent(' ');
     loc->setVisible(true);
     loc->setVisita(true);

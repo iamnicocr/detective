@@ -32,6 +32,7 @@ private:
     bool isHint(char content);
     void collectHint(Location* loc);
     void useHint();
+    int hintsFound;
 
 public:
     Game();
