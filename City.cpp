@@ -226,6 +226,18 @@ void City::removeRandAlleys(int amnt) {
     cout << "La Coartada elimino " << removed << " callejones del tablero." << endl;
 }
 
+void City::relocHint(char type) {
+    Location* loc = getRandFreeLoc();
+    if (loc == nullptr) {
+        cout << "No se pudo reubicar la pista usada." << endl;
+        return;
+    }
+    loc->setContent(type);
+    loc->setVisible(false);
+    loc->setVisita(false);
+    cout << "La pista " << type << " volvio al mapa." << endl;
+}
+
 void City::genAlleys() {
     int created = 0;
     int tries = 0;
