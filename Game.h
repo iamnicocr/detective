@@ -9,6 +9,7 @@
 #include "ABBScores.h"
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 class Game {
@@ -19,6 +20,7 @@ private:
     HashSospecha tablaSospecha;
     ColaTestigos colaTestigo;
     ABBScores scoreTree;
+    vector<string> faultAtribs;
     bool activeGame;
     string faultName;
     void setRandomFault();
@@ -36,6 +38,8 @@ private:
     void useHint();
     int hintsFound;
     void loadSospechosos();
+    bool isAtribRevealed(string atrib);
+    void revealFaultAtrib();
 
 public:
     Game();

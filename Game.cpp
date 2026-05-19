@@ -72,6 +72,7 @@ void Game::startGame() {
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
     hintsFound = 0;
     faultName = "";
+    faultAtribs.clear();
     loadSospechosos();
     setRandomFault();
     city.genBaseCity();
@@ -176,6 +177,7 @@ void Game::collectHint(Location* loc) {
     hintStack.push(hint);
     hintsFound++;
     cout << "Has recogido una pista: " << hint.getTypeName() << " (" << type << ")" << endl;
+    revealFaultAtrib();
     cout << "Progreso del caso: " << hintsFound << "/10 pistas recogidas." << endl;
     if (hintsFound >= 10) {
         cout << "Ya reuniste las 10 pistas. La fase de acusacion se activara en el siguiente avance." << endl;
@@ -270,6 +272,49 @@ void Game::playLoop() {
         } else {
             cout << "Accion invalida." << endl;
             city.printCity(detective);
+        }
+    }
+}
+
+bool Game::isAtribRevealed(string atrib) {
+    for (int i = 0; i < faultAtribs.size(); i++) {
+        if (faultAtribs[i] == atrib) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Game::revealFaultAtrib() {
+    Sospechoso* fault = tablaSospecha.search(faultName);
+
+    if (fault == nullptr) {
+        cout << "No se pudo revelar informacion del culpable." << endl;
+        return;
+    }
+
+    vector<string> atribs = fault->getAtribs();
+
+    if (faultAtribs.size() >= atribs.size()) {
+        cout << "Ya se revelaron todos los atributos disponibles del culpable." << endl;
+        return;
+    }
+
+    int tries = 0;
+    while (tries < 30) {
+        int posc = rand() % atribs.size();
+        if (!isAtribRevealed(atribs[posc])) {
+            faultAtribs.push_back(atribs[posc]);
+            cout << "Nuevo dato del culpable: " << atribs[posc] << endl;
+            return;
+        }
+        tries++;
+    }
+    for (int i = 0; i < atribs.size(); i++) {
+        if (!isAtribRevealed(atribs[i])) {
+            faultAtribs.push_back(atribs[i]);
+            cout << "Nuevo dato del culpable: " << atribs[i] << endl;
+            return;
         }
     }
 }
