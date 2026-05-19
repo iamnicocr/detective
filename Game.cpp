@@ -70,6 +70,7 @@ void Game::startGame() {
     cout << endl;
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
     hintsFound = 0;
+    loadSospechosos();
     city.genBaseCity();
     city.LocRandDetec(detective);
     city.genHints();
@@ -162,6 +163,19 @@ void Game::collectHint(Location* loc) {
     loc->setContent(' ');
     loc->setVisible(true);
     loc->setVisita(true);
+}
+
+void Game::loadSospechosos() {
+    tablaSospecha = HashSospecha();
+    tablaSospecha.insert(Sospechoso("Carlos", "alto", "negro", "clara", "recta", "masculino"));
+    tablaSospecha.insert(Sospechoso("Diana", "alta", "rojo", "triguenia", "perfilada", "femenino"));
+    tablaSospecha.insert(Sospechoso("Eduardo", "medio", "castanio", "morena", "ancha", "masculino"));
+    tablaSospecha.insert(Sospechoso("Fernanda", "alta", "rubio", "clara", "pequenia", "femenino"));
+    tablaSospecha.insert(Sospechoso("Gonzalo", "bajo", "negro", "morena", "recta", "masculino"));
+    tablaSospecha.insert(Sospechoso("Hilda", "media", "castanio", "clara", "perfilada", "femenino"));
+    tablaSospecha.insert(Sospechoso("Ivan", "alto", "rubio", "triguenia", "ancha", "masculino"));
+    tablaSospecha.insert(Sospechoso("Laura", "baja", "rojo", "clara", "pequenia", "femenino"));
+    cout << "Sospechosos cargados en HashSospecha." << endl;
 }
 
 void Game::useHint() {

@@ -33,6 +33,7 @@ private:
     void collectHint(Location* loc);
     void useHint();
     int hintsFound;
+    void loadSospechosos();
 
 public:
     Game();
