@@ -291,13 +291,25 @@ void Game::playLoop() {
             tablaSospecha.show();
             city.printCity(detective);
         } else if (opc == 'I') {
-            cout << "Interrogatorio pendiente." << endl;
+            interrogWitness();
             city.printCity(detective);
         } else {
             cout << "Accion invalida." << endl;
             city.printCity(detective);
         }
     }
+}
+
+void Game::interrogWitness() {
+    if (colaTestigo.isEmpty()) {
+        cout << "No hay testigos pendientes por interrogar." << endl;
+        return;
+    }
+    Testigo testigo = colaTestigo.dequeue();
+    cout << "Interrogando al siguiente testigo..." << endl;
+    cout << testigo.getName() << ": " << testigo.getDeclar() << endl;
+    revealFaultAtrib();
+    colaTestigo.showAmont();
 }
 
 bool Game::isAtribRevealed(string atrib) {

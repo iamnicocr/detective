@@ -42,6 +42,7 @@ private:
     void revealFaultAtrib();
     bool isWitness(char content);
     void collectWitness(Location* loc);
+    void interrogWitness();
 
 public:
     Game();
