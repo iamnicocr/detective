@@ -40,6 +40,8 @@ private:
     void loadSospechosos();
     bool isAtribRevealed(string atrib);
     void revealFaultAtrib();
+    bool isWitness(char content);
+    void collectWitness(Location* loc);
 
 public:
     Game();

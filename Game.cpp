@@ -133,6 +133,7 @@ void Game::moveDetec(char opc) {
     next->setVisible(true);
     next->setVisita(true);
     collectHint(next);
+    collectWitness(next);
 }
 
 void Game::setRandomFault() {
@@ -149,6 +150,28 @@ void Game::setRandomFault() {
     } else {
         cout << "No se pudo seleccionar culpable." << endl;
     }
+}
+
+bool Game::isWitness(char content) {
+    return content == 'W';
+}
+
+void Game::collectWitness(Location* loc) {
+    if (loc == nullptr) {
+        return;
+    }
+    char content = loc->getContent();
+    if (!isWitness(content)) {
+        return;
+    }
+    Testigo testigo("Testigo", "Declaracion pendiente del caso");
+    colaTestigo.enqueue(testigo);
+    cout << "Encontraste un testigo." << endl;
+    cout << "Su declaracion fue agregada a la cola." << endl;
+    colaTestigo.showAmont();
+    loc->setContent(' ');
+    loc->setVisible(true);
+    loc->setVisita(true);
 }
 
 void Game::printControls() {
