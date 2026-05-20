@@ -30,6 +30,7 @@ public:
     void relocHint(char type);
     void hideMap(Location* posAct);
     void genHints();
+    void genTestWitnesses();
 };
 
 #endif

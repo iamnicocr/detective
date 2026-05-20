@@ -77,6 +77,7 @@ void Game::startGame() {
     setRandomFault();
     city.genBaseCity();
     city.LocRandDetec(detective);
+    city.genTestWitnesses();
     city.genHints();
     city.genAlleys();
     printStructs();

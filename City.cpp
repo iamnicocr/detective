@@ -220,6 +220,24 @@ void City::removeRandAlleys(int amnt) {
     cout << "La Coartada elimino " << removed << " callejones del tablero." << endl;
 }
 
+void City::genTestWitnesses() {
+    Location* loc1 = getLocation(0, 7);
+    Location* loc2 = getLocation(2, 2);
+    Location* loc3 = getLocation(6, 6);
+    if (loc1 != nullptr && loc1->isFree() && !loc1->getVisita()) {
+        loc1->setContent('W');
+        loc1->setVisible(true);
+    }
+    if (loc2 != nullptr && loc2->isFree() && !loc2->getVisita()) {
+        loc2->setContent('W');
+        loc2->setVisible(true);
+    }
+    if (loc3 != nullptr && loc3->isFree() && !loc3->getVisita()) {
+        loc3->setContent('W');
+        loc3->setVisible(true);
+    }
+}
+
 void City::relocHint(char type) {
     Location* loc = getRandFreeLoc();
     if (loc == nullptr) {
