@@ -31,6 +31,7 @@ public:
     void hideMap(Location* posAct);
     void genHints();
     void genTestWitnesses();
+    void genWitnesses();
 };
 
 #endif

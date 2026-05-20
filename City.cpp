@@ -115,6 +115,23 @@ Location* City::getLocation(int fila, int columna) {
     return act;
 }
 
+void City::genWitnesses() {
+    int created = 0;
+    int tries = 0;
+    while (created < 5 && tries < 200) {
+        Location* loc = getRandFreeLoc();
+        if (loc != nullptr && loc->isFree() && !loc->getVisita()) {
+            loc->setContent('W');
+            loc->setVisible(true);
+            created++;
+        }
+        tries++;
+    }
+    if (created < 5) {
+        cout << "No se pudieron generar todos los testigos." << endl;
+    }
+}
+
 void City::genTestHints() {
     Location* loc1 = getLocation(1, 3);
     Location* loc2 = getLocation(3, 6);
