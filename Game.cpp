@@ -276,9 +276,7 @@ void Game::playLoop() {
     bool playing = true;
     while (playing) {
         if (accusPhase) {
-            cout << endl;
-            cout << detective.getName() << ", has recolectado las 10 pistas." << endl;
-            cout << "Es momento de acusar, pero la seleccion del sospechoso se implementara en el siguiente avance." << endl;
+            startAccusation();
             playing = false;
             continue;
         }
@@ -299,7 +297,7 @@ void Game::playLoop() {
             useHint();
             city.printCity(detective);
         } else if (opc == 'V') {
-            tablaSospecha.show();
+            showSospechosos();
             city.printCity(detective);
         } else if (opc == 'I') {
             interrogWitness();
@@ -308,6 +306,73 @@ void Game::playLoop() {
             cout << "Accion invalida." << endl;
             city.printCity(detective);
         }
+    }
+}
+
+void Game::startAccusation() {
+    string name;
+    cout << endl;
+    cout << detective.getName() << ", has recolectado las 10 pistas." << endl;
+    cout << "Es momento de acusar." << endl;
+    showSospechosos();
+    cout << endl;
+    cout << "Escribe el nombre del sospechoso a acusar: ";
+    cin >> name;
+    int posc = tablaSospecha.getPosc(name);
+    cout << endl;
+    cout << "Aplicando funcion hash al nombre " << name << "..." << endl;
+    cout << "Posicion calculada en HashSospecha: " << posc << endl;
+    cout << "Buscando en el bucket correspondiente..." << endl;
+    Sospechoso* accused = tablaSospecha.search(name);
+    if (accused == nullptr) {
+        cout << "El sospechoso no esta registrado en el caso." << endl;
+        cout << "La comparacion final se implementara en el siguiente avance." << endl;
+        return;
+    }
+    cout << "Sospechoso encontrado en HashSospecha." << endl;
+    cout << "Nombre encontrado: " << accused->getName() << endl;
+}
+
+void Game::showSospechosos() {
+    string names[8] = {
+        "Carlos", "Diana", "Eduardo", "Fernanda",
+        "Gonzalo", "Hilda", "Ivan", "Laura"
+    };
+    cout << endl;
+    cout << detective.getName() << ", sospechosos del caso:" << endl;
+    cout << "Atributos del culpable revelados hasta ahora:" << endl;
+    if (faultAtribs.empty()) {
+        cout << "-" << endl;
+    } else {
+        for (int i = 0; i < faultAtribs.size(); i++) {
+            cout << "- " << faultAtribs[i] << endl;
+        }
+    }
+    cout << endl;
+    cout << "Tabla de sospechosos:" << endl;
+    for (int i = 0; i < 8; i++) {
+        Sospechoso* sosp = tablaSospecha.search(names[i]);
+        if (sosp == nullptr) {
+            continue;
+        }
+        vector<string> atribs = sosp->getAtribs();
+        cout << sosp->getName() << " | atributos confirmados: ";
+        bool found = false;
+        for (int j = 0; j < atribs.size(); j++) {
+            for (int k = 0; k < faultAtribs.size(); k++) {
+                if (atribs[j] == faultAtribs[k]) {
+                    if (found) {
+                        cout << ", ";
+                    }
+                    cout << atribs[j];
+                    found = true;
+                }
+            }
+        }
+        if (!found) {
+            cout << "-";
+        }
+        cout << endl;
     }
 }
 

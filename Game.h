@@ -31,6 +31,7 @@ private:
     void registerDetec();
     void startGame();
     void printScores();
+    void showSospechosos();
     void printStructs();
     void moveDetec(char opc);
     bool isHint(char content);
@@ -44,6 +45,7 @@ private:
     void collectWitness(Location* loc);
     void interrogWitness();
     bool accusPhase;
+    void startAccusation();
 
 public:
     Game();

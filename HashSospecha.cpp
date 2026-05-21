@@ -12,6 +12,10 @@ int HashSospecha::funcHas(string passw) {
     return sum % SIZE;
 }
 
+int HashSospecha::getPosc(string passw) {
+    return funcHas(passw);
+}
+
 void HashSospecha::insert(Sospechoso sospechoso) {
     string passw = sospechoso.getName();
     int posc = funcHas(passw);

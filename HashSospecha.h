@@ -16,6 +16,7 @@ private:
 
 public:
     HashSospecha();
+    int getPosc(string passw);
     void insert(Sospechoso sospechoso);
     bool exist(string name);
     Sospechoso* search(string name);
