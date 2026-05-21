@@ -43,6 +43,7 @@ private:
     bool isWitness(char content);
     void collectWitness(Location* loc);
     void interrogWitness();
+    bool accusPhase;
 
 public:
     Game();

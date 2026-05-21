@@ -3,6 +3,7 @@
 
 Game::Game() {
     activeGame = true;
+    accusPhase = false;
     hintsFound = 0;
     faultName = "";
 }
@@ -71,6 +72,7 @@ void Game::startGame() {
     cout << endl;
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
     hintsFound = 0;
+    accusPhase = false;
     faultName = "";
     faultAtribs.clear();
     loadSospechosos();
@@ -204,7 +206,9 @@ void Game::collectHint(Location* loc) {
     revealFaultAtrib();
     cout << "Progreso del caso: " << hintsFound << "/10 pistas recogidas." << endl;
     if (hintsFound >= 10) {
-        cout << "Ya reuniste las 10 pistas. La fase de acusacion se activara en el siguiente avance." << endl;
+        accusPhase = true;
+        cout << "Ya reuniste las 10 pistas." << endl;
+        cout << "La fase de acusacion esta lista." << endl;
     }
     loc->setContent(' ');
     loc->setVisible(true);
@@ -271,6 +275,13 @@ void Game::playLoop() {
     char opc;
     bool playing = true;
     while (playing) {
+        if (accusPhase) {
+            cout << endl;
+            cout << detective.getName() << ", has recolectado las 10 pistas." << endl;
+            cout << "Es momento de acusar, pero la seleccion del sospechoso se implementara en el siguiente avance." << endl;
+            playing = false;
+            continue;
+        }
         printControls();
         cout << endl;
         cout << "Ingrese una accion: ";
