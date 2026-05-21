@@ -320,17 +320,33 @@ void Game::startAccusation() {
     cin >> name;
     int posc = tablaSospecha.getPosc(name);
     cout << endl;
-    cout << "Aplicando funcion hash al nombre " << name << "..." << endl;
-    cout << "Posicion calculada en HashSospecha: " << posc << endl;
-    cout << "Buscando en el bucket correspondiente..." << endl;
     Sospechoso* accused = tablaSospecha.search(name);
     if (accused == nullptr) {
         cout << "El sospechoso no esta registrado en el caso." << endl;
-        cout << "La comparacion final se implementara en el siguiente avance." << endl;
+        cout << "La acusacion se toma como incorrecta." << endl;
+        detective.doubScore();
+        cout << "Caso cerrado como fracasado." << endl;
+        cout << "Puntaje penalizado al doble." << endl;
+        cout << "Puntaje final: " << detective.getScore() << " movimientos." << endl;
+        accusPhase = false;
         return;
     }
     cout << "Sospechoso encontrado en HashSospecha." << endl;
     cout << "Nombre encontrado: " << accused->getName() << endl;
+    if (accused->getFault()) {
+        cout << endl;
+        cout << "Caso resuelto. " << accused->getName() << " era el culpable." << endl;
+        cout << "Puntaje final: " << detective.getScore() << " movimientos." << endl;
+    } else {
+        cout << endl;
+        cout << "Acusacion incorrecta." << endl;
+        cout << "El culpable real era: " << faultName << endl;
+        detective.doubScore();
+        cout << "Caso cerrado como fracasado." << endl;
+        cout << "Puntaje penalizado al doble." << endl;
+        cout << "Puntaje final: " << detective.getScore() << " movimientos." << endl;
+    }
+    accusPhase = false;
 }
 
 void Game::showSospechosos() {
