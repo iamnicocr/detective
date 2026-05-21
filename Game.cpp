@@ -328,6 +328,7 @@ void Game::startAccusation() {
         cout << "Caso cerrado como fracasado." << endl;
         cout << "Puntaje penalizado al doble." << endl;
         cout << "Puntaje final: " << detective.getScore() << " movimientos." << endl;
+        saveFinalScore();
         accusPhase = false;
         return;
     }
@@ -411,6 +412,11 @@ bool Game::isAtribRevealed(string atrib) {
         }
     }
     return false;
+}
+
+void Game::saveFinalScore() {
+    scoreTree.insert(detective.getName(), detective.getScore());
+    cout << "Score guardado en ABBScores." << endl;
 }
 
 void Game::revealFaultAtrib() {

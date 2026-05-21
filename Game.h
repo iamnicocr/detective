@@ -46,6 +46,7 @@ private:
     void interrogWitness();
     bool accusPhase;
     void startAccusation();
+    void saveFinalScore();
 
 public:
     Game();
