@@ -29,6 +29,8 @@ private:
     ScoreNode* root;
     ScoreNode* recursInsert(ScoreNode* act, string nameDetective, int score);
     ScoreNode* searchRecurs(ScoreNode* act, string nameDetective);
+    ScoreNode* minNode(ScoreNode* act);
+    ScoreNode* deleteScoreNode(ScoreNode* act, string nameDetective, int score);
     void printRecursOrd(ScoreNode* act);
     void freeRecurs(ScoreNode* act);
 
