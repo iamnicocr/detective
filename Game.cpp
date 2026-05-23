@@ -29,6 +29,10 @@ void Game::ejecutar() {
                 break;
 
             case 3:
+                searchDetecScore();
+                break;
+
+            case 4:
                 cout << "Saliendo del sistema del detective..." << endl;
                 activeGame = false;
                 break;
@@ -38,6 +42,21 @@ void Game::ejecutar() {
                 break;
         }
     }
+}
+
+void Game::searchDetecScore() {
+    string name;
+    cout << endl;
+    cout << "Ingrese el nombre del detective a buscar: ";
+    cin >> name;
+    ScoreNode* found = scoreTree.search(name);
+    if (found == nullptr) {
+        cout << name << " aun no tiene partidas registradas." << endl;
+        return;
+    }
+    cout << "Detective encontrado en ABBScores." << endl;
+    cout << "Nombre: " << found->getDetecName() << endl;
+    cout << "Mejor score: " << found->getScore() << " puntos." << endl;
 }
 
 void Game::printTitle() {
@@ -54,7 +73,8 @@ void Game::printMenu() {
     cout << "--------------- MENU PRINCIPAL -----------" << endl;
     cout << "1. Iniciar juego" << endl;
     cout << "2. Ver puntajes historicos" << endl;
-    cout << "3. Salir" << endl;
+    cout << "3. Buscar detective por nombre" << endl;
+    cout << "4. Salir" << endl;
     cout << "------------------------------------------" << endl;
 }
 

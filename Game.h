@@ -47,6 +47,7 @@ private:
     bool accusPhase;
     void startAccusation();
     void saveFinalScore();
+    void searchDetecScore();
 
 public:
     Game();
