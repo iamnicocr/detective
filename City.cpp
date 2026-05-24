@@ -185,12 +185,14 @@ Location* City::getRandFreeLoc() {
 }
 
 void City::LocRandDetec(User& user) {
-    Location* act = getLocation(4, 4);
-    if (act != nullptr) {
-        user.setActPos(act);
-        act->setVisible(true);
-        act->setVisita(true);
+    Location* act = getRandFreeLoc();
+    if (act == nullptr) {
+        cout << "No se pudo ubicar al detective." << endl;
+        return;
     }
+    user.setActPos(act);
+    act->setVisible(true);
+    act->setVisita(true);
 }
 
 void City::removeRandAlleys(int amnt) {
