@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <cstdlib>
+#include <cctype>
 
 Game::Game() {
     activeGame = true;
@@ -303,6 +304,7 @@ void Game::playLoop() {
         cout << endl;
         cout << "Ingrese una accion: ";
         cin >> opc;
+        opc = toupper(opc);
         if (opc == 'Q') {
             cout << "Saliendo de la partida actual..." << endl;
             playing = false;
