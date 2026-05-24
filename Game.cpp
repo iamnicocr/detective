@@ -255,7 +255,11 @@ void Game::useHint() {
     }
     Hint hint = hintStack.pop();
     char type = hint.getTipo();
+    if (hintsFound > 0) {
+        hintsFound--;
+    }
     cout << "Usaste la ultima pista recogida: " << hint.getTypeName() << " (" << type << ")" << endl;
+    cout << "Progreso del caso: " << hintsFound << "/10 pistas disponibles." << endl;
     if (type == 'H') {
         int prevScore = detective.getScore();
         detective.halfScore();
