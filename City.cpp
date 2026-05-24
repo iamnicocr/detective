@@ -257,8 +257,16 @@ void City::genTestWitnesses() {
     }
 }
 
-void City::relocHint(char type) {
-    Location* loc = getRandFreeLoc();
+void City::relocHint(char type, Location* posAct) {
+    Location* loc = nullptr;
+    int tries = 0;
+    while (loc == nullptr && tries < 100) {
+        Location* aux = getRandFreeLoc();
+        if (aux != nullptr && aux != posAct) {
+            loc = aux;
+        }
+        tries++;
+    }
     if (loc == nullptr) {
         cout << "No se pudo reubicar la pista usada." << endl;
         return;

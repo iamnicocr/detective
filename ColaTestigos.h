@@ -12,10 +12,8 @@ private:
 
 public:
     NodoTestigo(Testigo dato);
-
     Testigo getDato();
     void setDato(Testigo dato);
-
     NodoTestigo* getNext();
     void setNext(NodoTestigo* next);
 };
@@ -29,14 +27,11 @@ private:
 public:
     ColaTestigos();
     ~ColaTestigos();
-
     bool isEmpty();
     int getAmnt();
-
     void enqueue(Testigo testigo);
     Testigo dequeue();
     Testigo front();
-
     void showAmont();
     void clean();
 };

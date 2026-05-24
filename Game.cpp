@@ -287,7 +287,7 @@ void Game::useHint() {
         newPos->setVisita(true);
         cout << "La Prueba Forense movio al detective a otra ubicacion." << endl;
     }
-    city.relocHint(type);
+    city.relocHint(type, detective.getActPos());
     city.hideMap(detective.getActPos());
 }
 

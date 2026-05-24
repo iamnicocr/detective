@@ -41,7 +41,6 @@ int ColaTestigos::getAmnt() {
 
 void ColaTestigos::enqueue(Testigo testigo) {
     NodoTestigo* newNode = new NodoTestigo(testigo);
-
     if (isEmpty()) {
         frente = newNode;
         end = newNode;
@@ -49,7 +48,6 @@ void ColaTestigos::enqueue(Testigo testigo) {
         end->setNext(newNode);
         end = newNode;
     }
-
     cantidad++;
 }
 

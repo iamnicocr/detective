@@ -27,7 +27,7 @@ public:
     void genAlleys();
     void genTestHints();
     void removeRandAlleys(int amnt);
-    void relocHint(char type);
+    void relocHint(char type, Location* posAct);
     void hideMap(Location* posAct);
     void genHints();
     void genTestWitnesses();
