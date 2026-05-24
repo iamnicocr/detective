@@ -42,6 +42,12 @@ void Game::searchDetecScore() {
     string name;
     cout << "Ingrese el nombre del detective a buscar: ";
     cin >> name;
+    for (int i = 0; i < name.length(); i++) {
+        name[i] = tolower(name[i]);
+    }
+    if (!name.empty()) {
+        name[0] = toupper(name[0]);
+    }
     ScoreNode* found = scoreTree.search(name);
     if (found == nullptr) {
         cout << name << " aun no tiene partidas registradas." << endl;
@@ -75,6 +81,12 @@ void Game::registerDetec() {
     string name;
     cout << "Ingrese el nombre del detective: ";
     cin >> name;
+    for (int i = 0; i < name.length(); i++) {
+        name[i] = tolower(name[i]);
+    }
+    if (!name.empty()) {
+        name[0] = toupper(name[0]);
+    }
     detective = User(name);
 }
 
@@ -355,6 +367,12 @@ void Game::startAccusation() {
     cout << endl;
     cout << "Escribe el nombre del sospechoso a acusar: ";
     cin >> name;
+    for (int i = 0; i < name.length(); i++) {
+        name[i] = tolower(name[i]);
+    }
+    if (!name.empty()) {
+        name[0] = toupper(name[0]);
+    }
     int posc = tablaSospecha.getPosc(name);
     cout << endl;
     Sospechoso* accused = tablaSospecha.search(name);
