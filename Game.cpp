@@ -21,20 +21,16 @@ void Game::ejecutar() {
                 registerDetec();
                 startGame();
                 break;
-
             case 2:
                 printScores();
                 break;
-
             case 3:
                 searchDetecScore();
                 break;
-
             case 4:
                 cout << "Saliendo del sistema del detective..." << endl;
                 activeGame = false;
                 break;
-
             default:
                 cout << "Opcion invalida. Intente nuevamente." << endl;
                 break;
@@ -44,7 +40,6 @@ void Game::ejecutar() {
 
 void Game::searchDetecScore() {
     string name;
-    cout << endl;
     cout << "Ingrese el nombre del detective a buscar: ";
     cin >> name;
     ScoreNode* found = scoreTree.search(name);
@@ -78,16 +73,12 @@ void Game::printMenu() {
 
 void Game::registerDetec() {
     string name;
-
-    cout << endl;
     cout << "Ingrese el nombre del detective: ";
     cin >> name;
-
     detective = User(name);
 }
 
 void Game::startGame() {
-    cout << endl;
     cout << "Preparando caso para " << detective.getName() << "..." << endl;
     hintsFound = 0;
     accusPhase = false;
@@ -103,8 +94,6 @@ void Game::startGame() {
     city.genHints();
     city.genAlleys();
     printStructs();
-    cout << endl;
-    cout << "Vista inicial del tablero:" << endl;
     city.printCity(detective);
     playLoop();
 }
@@ -246,7 +235,6 @@ void Game::printFinResum(bool solved) {
     }
     cout << "Culpable real: " << faultName << endl;
     cout << "Score final: " << detective.getScore() << " movimientos" << endl;
-    cout << "Pistas disponibles al cierre: " << hintsFound << "/10" << endl;
     cout << "Atributos revelados: ";
     if (faultAtribs.empty()) {
         cout << "-";
@@ -283,11 +271,7 @@ void Game::useHint() {
     }
     Hint hint = hintStack.pop();
     char type = hint.getTipo();
-    if (hintsFound > 0) {
-        hintsFound--;
-    }
     cout << "Usaste la ultima pista recogida: " << hint.getTypeName() << " (" << type << ")" << endl;
-    cout << "Progreso del caso: " << hintsFound << "/10 pistas disponibles." << endl;
     if (type == 'H') {
         int prevScore = detective.getScore();
         detective.halfScore();
@@ -392,6 +376,7 @@ void Game::startAccusation() {
         cout << endl;
         cout << "Caso resuelto. " << accused->getName() << " era el culpable." << endl;
         cout << "Puntaje final: " << detective.getScore() << " movimientos." << endl;
+        printFinResum(true);
     } else {
         cout << endl;
         cout << "Acusacion incorrecta." << endl;
@@ -400,7 +385,9 @@ void Game::startAccusation() {
         cout << "Caso cerrado como fracasado." << endl;
         cout << "Puntaje penalizado al doble." << endl;
         cout << "Puntaje final: " << detective.getScore() << " movimientos." << endl;
+        printFinResum(false);
     }
+    saveFinalScore();
     accusPhase = false;
 }
 
@@ -470,7 +457,7 @@ bool Game::isAtribRevealed(string atrib) {
 
 void Game::saveFinalScore() {
     scoreTree.insert(detective.getName(), detective.getScore());
-    cout << "Score guardado en ABBScores." << endl;
+    cout << "Score guardado correctamente." << endl;
 }
 
 void Game::revealFaultAtrib() {

@@ -122,7 +122,7 @@ void City::genWitnesses() {
         Location* loc = getRandFreeLoc();
         if (loc != nullptr && loc->isFree() && !loc->getVisita()) {
             loc->setContent('W');
-            loc->setVisible(true);
+            loc->setVisible(false);
             created++;
         }
         tries++;
