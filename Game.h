@@ -25,6 +25,7 @@ private:
     string faultName;
     void setRandomFault();
     void playLoop();
+    void printFinResum(bool solved);
     void printControls();
     void printTitle();
     void printMenu();

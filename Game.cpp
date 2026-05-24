@@ -235,6 +235,34 @@ void Game::collectHint(Location* loc) {
     loc->setVisita(true);
 }
 
+void Game::printFinResum(bool solved) {
+    cout << endl;
+    cout << "========== RESUMEN FINAL ==========" << endl;
+    cout << "Detective: " << detective.getName() << endl;
+    if (solved) {
+        cout << "Resultado: caso resuelto" << endl;
+    } else {
+        cout << "Resultado: caso fracasado" << endl;
+    }
+    cout << "Culpable real: " << faultName << endl;
+    cout << "Score final: " << detective.getScore() << " movimientos" << endl;
+    cout << "Pistas disponibles al cierre: " << hintsFound << "/10" << endl;
+    cout << "Atributos revelados: ";
+    if (faultAtribs.empty()) {
+        cout << "-";
+    } else {
+        for (int i = 0; i < faultAtribs.size(); i++) {
+            cout << faultAtribs[i];
+
+            if (i < faultAtribs.size() - 1) {
+                cout << ", ";
+            }
+        }
+    }
+    cout << endl;
+    cout << "===================================" << endl;
+}
+
 void Game::loadSospechosos() {
     tablaSospecha = HashSospecha();
     tablaSospecha.insert(Sospechoso("Carlos", "alto", "negro", "clara", "recta", "masculino"));
@@ -353,6 +381,7 @@ void Game::startAccusation() {
         cout << "Caso cerrado como fracasado." << endl;
         cout << "Puntaje penalizado al doble." << endl;
         cout << "Puntaje final: " << detective.getScore() << " movimientos." << endl;
+        printFinResum(false);
         saveFinalScore();
         accusPhase = false;
         return;
