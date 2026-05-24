@@ -10,14 +10,11 @@ Game::Game() {
 
 void Game::ejecutar() {
     int opc;
-
     printTitle();
-
     while (activeGame) {
         printMenu();
         cout << "Seleccione una opcion: ";
         cin >> opc;
-
         switch (opc) {
             case 1:
                 registerDetec();
@@ -95,6 +92,8 @@ void Game::startGame() {
     accusPhase = false;
     faultName = "";
     faultAtribs.clear();
+    hintStack.clean();
+    colaTestigo.clean();
     loadSospechosos();
     setRandomFault();
     city.genBaseCity();
