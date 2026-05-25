@@ -4,28 +4,28 @@ HashSospecha::HashSospecha() {
     table.resize(SIZE);
 }
 
-int HashSospecha::funcHas(string passw) {
+int HashSospecha::funcHas(string key) {
     int sum = 0;
-    for (int i = 0; i < passw.length(); i++) {
-        sum += passw[i];
+    for (int i = 0; i < key.length(); i++) {
+        sum += key[i];
     }
     return sum % SIZE;
 }
 
-int HashSospecha::getPosc(string passw) {
-    return funcHas(passw);
+int HashSospecha::getPosc(string key) {
+    return funcHas(key);
 }
 
 void HashSospecha::insert(Sospechoso sospechoso) {
-    string passw = sospechoso.getName();
-    int posc = funcHas(passw);
+    string key = sospechoso.getName();
+    int posc = funcHas(key);
     for (auto& par : table[posc]) {
-        if (par.first == passw) {
-            cout << "El sospechoso " << passw << " ya existe en la tabla." << endl;
+        if (par.first == key) {
+            cout << "El sospechoso " << key << " ya existe en la tabla." << endl;
             return;
         }
     }
-    table[posc].push_back(make_pair(passw, sospechoso));
+    table[posc].push_back(make_pair(key, sospechoso));
 }
 
 bool HashSospecha::exist(string name) {
@@ -46,7 +46,6 @@ void HashSospecha::show() {
     cout << "Tabla Hash de sospechosos:" << endl;
     for (int i = 0; i < SIZE; i++) {
         cout << "Posicion " << i << ": ";
-
         if (table[i].empty()) {
             cout << "vacia";
         } else {

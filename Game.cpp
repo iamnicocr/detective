@@ -388,7 +388,6 @@ void Game::startAccusation() {
         accusPhase = false;
         return;
     }
-    cout << "Sospechoso encontrado en HashSospecha." << endl;
     cout << "Nombre encontrado: " << accused->getName() << endl;
     if (accused->getFault()) {
         cout << endl;

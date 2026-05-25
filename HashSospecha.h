@@ -10,13 +10,13 @@ using namespace std;
 
 class HashSospecha {
 private:
-    static const int SIZE = 17;
+    static const int SIZE = 100;
     vector<list<pair<string, Sospechoso>>> table;
-    int funcHas(string passw);
+    int funcHas(string key);
 
 public:
     HashSospecha();
-    int getPosc(string passw);
+    int getPosc(string key);
     void insert(Sospechoso sospechoso);
     bool exist(string name);
     Sospechoso* search(string name);

@@ -77,6 +77,7 @@ void HintStack::show() {
         if (posc == 0) {
             cout << " <- ultima pista disponible";
         }
+        cout << " --- " << endl;
         cout << endl;
         act = act->getNext();
         posc++;
