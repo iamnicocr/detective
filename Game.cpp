@@ -265,15 +265,37 @@ void Game::printFinResum(bool solved) {
 
 void Game::loadSospechosos() {
     tablaSospecha = HashSospecha();
-    tablaSospecha.insert(Sospechoso("Carlos", "alto", "negro", "clara", "recta", "masculino"));
-    tablaSospecha.insert(Sospechoso("Diana", "alta", "rojo", "triguenia", "perfilada", "femenino"));
-    tablaSospecha.insert(Sospechoso("Eduardo", "medio", "castanio", "morena", "ancha", "masculino"));
-    tablaSospecha.insert(Sospechoso("Fernanda", "alta", "rubio", "clara", "pequenia", "femenino"));
-    tablaSospecha.insert(Sospechoso("Gonzalo", "bajo", "negro", "morena", "recta", "masculino"));
-    tablaSospecha.insert(Sospechoso("Hilda", "media", "castanio", "clara", "perfilada", "femenino"));
-    tablaSospecha.insert(Sospechoso("Ivan", "alto", "rubio", "triguenia", "ancha", "masculino"));
-    tablaSospecha.insert(Sospechoso("Laura", "baja", "rojo", "clara", "pequenia", "femenino"));
-    cout << "Sospechosos cargados en HashSospecha." << endl;
+    tablaSospecha.insert(Sospechoso("Carlos", "alto", "negro", "clara", "recta", "masculino",
+                                    "zurdo", "pastuso", "sin cicatriz", "reloj negro", "botas cafes",
+                                    "olor a cafe", "taxi", "mochila gris", "estaba en el cafe"));
+
+    tablaSospecha.insert(Sospechoso("Diana", "alta", "rojo", "triguenia", "perfilada", "femenino",
+                                    "diestra", "santandereano", "cicatriz mano", "aretes dorados", "tenis blancos",
+                                    "olor a perfume dulce", "moto", "carpeta azul", "estaba en el hospital"));
+
+    tablaSospecha.insert(Sospechoso("Eduardo", "medio", "castanio", "morena", "ancha", "masculino",
+                                    "diestro", "rolo", "sin cicatriz", "gafas redondas", "zapatos negros",
+                                    "olor a humo", "bus", "maletin negro", "estaba en el archivo"));
+
+    tablaSospecha.insert(Sospechoso("Fernanda", "alta", "rubio", "clara", "pequenia", "femenino",
+                                    "zurda", "costeno", "cicatriz ceja", "reloj negro", "botas cafes",
+                                    "olor a cafe", "taxi", "llavero rojo", "estaba en el callejon"));
+
+    tablaSospecha.insert(Sospechoso("Gonzalo", "bajo", "negro", "morena", "recta", "masculino",
+                                    "diestro", "paisa", "cicatriz brazo", "gorra azul", "tenis blancos",
+                                    "olor a lluvia", "bicicleta", "mochila gris", "estaba en la esquina"));
+
+    tablaSospecha.insert(Sospechoso("Hilda", "media", "castanio", "clara", "perfilada", "femenino",
+                                    "zurda", "pastuso", "sin cicatriz", "collar plata", "zapatos negros",
+                                    "olor a perfume dulce", "bus", "sobre amarillo", "estaba en el cafe"));
+
+    tablaSospecha.insert(Sospechoso("Ivan", "alto", "rubio", "triguenia", "ancha", "masculino",
+                                    "diestro", "paisa", "cicatriz ceja", "gafas redondas", "botas cafes",
+                                    "olor a humo", "moto", "carpeta azul", "estaba en el hospital"));
+
+    tablaSospecha.insert(Sospechoso("Laura", "baja", "rojo", "clara", "pequenia", "femenino",
+                                    "diestra", "rolo", "cicatriz mano", "aretes dorados", "tenis blancos",
+                                    "olor a lluvia", "taxi", "maletin negro", "estaba en el archivo"));
 }
 
 void Game::useHint() {

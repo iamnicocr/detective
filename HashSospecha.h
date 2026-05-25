@@ -10,7 +10,7 @@ using namespace std;
 
 class HashSospecha {
 private:
-    static const int SIZE = 100;
+    static const int SIZE = 9;
     vector<list<pair<string, Sospechoso>>> table;
     int funcHas(string key);
 

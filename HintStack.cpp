@@ -73,15 +73,19 @@ void HintStack::show() {
     int posc = 0;
     cout << "Pistas recogidas:" << endl;
     while (act != nullptr) {
-        cout << "[ " << act->getDato().getTipo() << " ]";
+        cout << "[# " << act->getDato().getTipo() << " #]";
         if (posc == 0) {
-            cout << " <- ultima pista disponible";
+            cout << " <- ultima (la que se usaria con X)";
+        } else if (posc == 1) {
+            cout << " <- penultima";
+        } else if (posc == 2) {
+            cout << " <- antepenultima";
         }
-        cout << " --- " << endl;
         cout << endl;
         act = act->getNext();
         posc++;
     }
+    cout << "[#####]" << endl;
 }
 
 void HintStack::clean() {
